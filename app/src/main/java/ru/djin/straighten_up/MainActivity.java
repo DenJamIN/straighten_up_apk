@@ -1,22 +1,23 @@
 package ru.djin.straighten_up;
 
-import static androidx.core.app.NotificationCompat.PRIORITY_HIGH;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 
+import android.annotation.SuppressLint;
+import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.content.Context;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
 
-import ru.djin.straighten_up.notification.Notification;
 
 public class MainActivity extends AppCompatActivity {
 
-    final String CHANNEL_ID = "notify";
+    final String CHANNEL_ID = "notifyStraightenUp";
 
     //TODO форматировать
     @Override
@@ -28,17 +29,30 @@ public class MainActivity extends AppCompatActivity {
 
         Button notifyBtn = findViewById(R.id.button);
 
-        NotificationManager notificationManager = (NotificationManager) getApplicationContext()
-                .getSystemService(Context.NOTIFICATION_SERVICE);
+        notifyBtn.setOnClickListener(view -> {
+            Toast.makeText(this, "Reminder Set!", Toast.LENGTH_SHORT).show();
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_accessibility)
-                .setContentTitle(Notification.Messages.getNotifyTitle())
-                .setContentText(Notification.Messages.getNotifyText())
-                .setPriority(PRIORITY_HIGH);
+            Intent intent = new Intent(MainActivity.this, ReminderBroadcast.class);
+            @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                    MainActivity.this,
+                    0,
+                    intent,
+                    PendingIntent.FLAG_UPDATE_CURRENT
+            );
 
+            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-        notifyBtn.setOnClickListener(view -> notificationManager.notify(100, builder.build()));
+            //TODO цикличность и рандомизация времени
+            long timeAtButtonClick = System.currentTimeMillis();
+            long tenSecondsInMillis = 1000 * 10;
+
+            alarmManager.set(
+                    AlarmManager.RTC_WAKEUP,
+                    timeAtButtonClick + tenSecondsInMillis,
+                    pendingIntent
+            );
+
+        });
     }
 
     private void createNotificationChannelIfNeeded(){
