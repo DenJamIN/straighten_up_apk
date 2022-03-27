@@ -12,6 +12,8 @@ import androidx.core.app.NotificationManagerCompat;
 import ru.djin.straighten_up.notification.Notification;
 
 public class ReminderBroadcast extends BroadcastReceiver {
+
+    //TODO добавить открытие приложение по нажатию на уведомление. Придумать логику обработки
     @Override
     public void onReceive(Context context, Intent intent){
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "notifyStraightenUp")
