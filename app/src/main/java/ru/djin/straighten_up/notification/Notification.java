@@ -53,42 +53,4 @@ public class Notification {
             return texts[ThreadLocalRandom.current().nextInt(texts.length)];
         }
     }
-
-    public static void initNotify(Context contextApp, NotificationManager notificationManager){
-        Intent intent = new Intent(contextApp, MainActivity.class);
-
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-
-        @SuppressLint("UnspecifiedImmutableFlag")
-        PendingIntent pendingIntent = PendingIntent.getActivity(
-                contextApp,
-                0,
-                intent,
-                PendingIntent.FLAG_UPDATE_CURRENT
-        );
-
-        NotificationCompat.Builder notifyBuilder =
-                new NotificationCompat.Builder(contextApp, CHANNEL_ID)
-                        .setAutoCancel(false)
-                        .setSmallIcon(R.drawable.ic_accessibility)
-                        .setWhen(System.currentTimeMillis())
-                        .setContentIntent(pendingIntent)
-                        .setContentTitle(Messages.getNotifyTitle())
-                        .setContentText(Messages.getNotifyText())
-                        .setPriority(PRIORITY_HIGH);
-
-        createChannelIfNeeded(notificationManager);
-        notificationManager.notify(NOTIFY_ID, notifyBuilder.build());
-    }
-
-    static void createChannelIfNeeded(NotificationManager manager){
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            NotificationChannel notificationChannel = new NotificationChannel(
-                    CHANNEL_ID,
-                    CHANNEL_ID,
-                    NotificationManager.IMPORTANCE_DEFAULT
-            );
-            manager.createNotificationChannel(notificationChannel);
-        }
-    }
 }
