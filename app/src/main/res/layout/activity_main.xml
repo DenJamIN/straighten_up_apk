@@ -31,8 +31,8 @@
     <SeekBar
         android:id="@+id/seekBarEnd"
         style="@style/Widget.AppCompat.SeekBar.Discrete"
-        android:layout_width="341dp"
-        android:layout_height="66dp"
+        android:layout_width="343dp"
+        android:layout_height="49dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:max="11"
@@ -45,20 +45,21 @@
 
     <Button
         android:id="@+id/startButton"
-        android:layout_width="264dp"
-        android:layout_height="110dp"
+        android:layout_width="271dp"
+        android:layout_height="73dp"
         android:text="@string/straughtenUpLabel"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:rippleColor="#E65050" />
 
     <SeekBar
         android:id="@+id/seekBarStart"
         style="@style/Widget.AppCompat.SeekBar.Discrete"
-        android:layout_width="334dp"
-        android:layout_height="60dp"
+        android:layout_width="339dp"
+        android:layout_height="47dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="240dp"
@@ -92,18 +93,14 @@
         app:layout_constraintTop_toBottomOf="@+id/seekBarStart"
         app:layout_constraintVertical_bias="1.0" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="119dp"
-        android:text="Выпрями спину"
-        android:textColor="@android:color/holo_orange_light"
-        android:textSize="37sp"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="342dp"
+        android:layout_height="164dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/seekBarEnd"
+        app:srcCompat="@drawable/__2022_05_08_123559" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

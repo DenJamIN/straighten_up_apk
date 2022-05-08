@@ -9,6 +9,8 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
@@ -25,11 +27,11 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
     private SeekBar seekBarStart;
     private SeekBar seekBarEnd;
 
-    //TODO форматировать
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle("Выпрями спину!");
 
         createNotificationChannelIfNeeded();
 
@@ -54,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
 
             AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-            //TODO цикличность и рандомизация времени
             long timeAtButtonClick = System.currentTimeMillis();
             long tenSecondsInMillis = 1000 * 10;
 
